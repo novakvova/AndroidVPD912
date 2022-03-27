@@ -4,10 +4,16 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 import android.view.View;
+import android.view.Window;
 import android.widget.EditText;
 import android.widget.TextView;
 
 import com.example.shop.dto.CreateProductDTO;
+import com.example.shop.network.ProductService;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -36,6 +42,21 @@ public class MainActivity extends AppCompatActivity {
                 editTextDescription.getText().toString(),
                 editTextImage.getText().toString()
         );
+        ProductService
+                .getInstance()
+                .jsonApi()
+                .create(dto)
+                .enqueue(new Callback<Void>() {
+                    @Override
+                    public void onResponse(Call<Void> call, Response<Void> response) {
+
+                    }
+
+                    @Override
+                    public void onFailure(Call<Void> call, Throwable t) {
+
+                    }
+                });
         int n=5;
 //        String text = editTextName.getText().toString();
 //        txtInfo.setText(text);
