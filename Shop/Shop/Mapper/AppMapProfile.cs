@@ -18,6 +18,11 @@ namespace Shop.Mapper
 
                 .ForMember(x=>x.Price, opt=> opt.MapFrom(x=>
                     Decimal.Parse(x.Price, cultureInfo)));
+
+            CreateMap<ProductEntity, ProductItemViewModel>()
+               .ForMember(x => x.DateCreated, opt => opt.MapFrom(x => 
+                    x.DateCreated.ToString("dd.MM.yyyy HH:mm:ss")))
+               .ForMember(x => x.Price, opt => opt.MapFrom(x =>x.Price.ToString(cultureInfo)));
         }
     }
 }

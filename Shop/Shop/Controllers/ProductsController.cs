@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Shop.Data;
 using Shop.Data.Entities;
 using Shop.Helpers;
 using Shop.Models;
@@ -13,9 +14,11 @@ namespace Shop.Controllers
     public class ProductsController : ControllerBase
     {
         private readonly IMapper _mapper;
-        public ProductsController(IMapper mapper)
+        private readonly AppEFContext _context;
+        public ProductsController(IMapper mapper, AppEFContext context)
         {
             _mapper = mapper;
+            _context = context;
         }
 
         [HttpPost("create")]
@@ -27,8 +30,19 @@ namespace Shop.Controllers
             img.Save(dir, ImageFormat.Jpeg);
 
             ProductEntity product = _mapper.Map<ProductEntity>(model);
+            product.Image = randomFilename;
+            _context.Products.Add(product);
+            _context.SaveChanges();
 
-            return Ok();
+            return Ok(new { id=product.Id });
+        }
+        [HttpGet("list")]
+        public IActionResult Index()
+        {
+            var list = _context.Products
+                    .Select(x=>_mapper.Map<ProductItemViewModel>(x))
+                    .ToList();
+            return Ok(list);
         }
     }
 }
