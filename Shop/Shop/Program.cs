@@ -1,6 +1,8 @@
 using FluentValidation.AspNetCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.FileProviders;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Serialization;
 using Shop.Data;
 using Shop.Mapper;
 
@@ -11,7 +13,13 @@ builder.Services.AddDbContext<AppEFContext>(options =>
 
 // Add services to the container.
 
-builder.Services.AddControllers();
+builder.Services.AddControllers().AddNewtonsoftJson(options =>
+{
+    options.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
+    options.SerializerSettings.DefaultValueHandling = DefaultValueHandling.Include;
+    options.SerializerSettings.NullValueHandling = NullValueHandling.Ignore;
+});
+
 builder.Services.AddAutoMapper(typeof(AppMapProfile));
 builder.Services.AddFluentValidation(x => x.RegisterValidatorsFromAssemblyContaining<Program>());
 
