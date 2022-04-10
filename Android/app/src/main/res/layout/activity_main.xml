@@ -70,23 +70,17 @@
 
         </com.google.android.material.textfield.TextInputLayout>
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/textFieldImage"
+        <Button
+            android:id="@+id/selectImage"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="42dp"
-            android:layout_marginTop="22dp"
             android:layout_marginEnd="42dp"
-            android:hint="Фото"
+            android:layout_marginTop="22dp"
+            android:onClick="handleSelectImageClick"
+            android:text="Обрати фото"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textFieldPrice">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/editTextImage"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-
-        </com.google.android.material.textfield.TextInputLayout>
+            app:layout_constraintTop_toBottomOf="@+id/textFieldPrice" />
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/textFieldDescription"
@@ -97,7 +91,7 @@
             android:layout_marginEnd="42dp"
             android:hint="Опис"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textFieldImage">
+            app:layout_constraintTop_toBottomOf="@+id/selectImage">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/editTextDescription"
