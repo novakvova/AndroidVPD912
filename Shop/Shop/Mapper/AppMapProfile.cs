@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Shop.Data.Entities;
+using Shop.Data.Entities.Identity;
 using Shop.Models;
 using System.Globalization;
 
@@ -23,6 +24,13 @@ namespace Shop.Mapper
                .ForMember(x => x.DateCreated, opt => opt.MapFrom(x => 
                     x.DateCreated.ToString("dd.MM.yyyy HH:mm:ss")))
                .ForMember(x => x.Price, opt => opt.MapFrom(x =>x.Price.ToString(cultureInfo)));
+
+            CreateMap<RegisterViewModel, AppUser>()
+                .ForMember(x => x.Photo, opt => opt.Ignore())
+                .ForMember(x => x.UserName, opt => opt.MapFrom(x => x.Email));
+
+            CreateMap<AppUser, UserItemViewModel>()
+                .ForMember(x => x.Photo, opt => opt.MapFrom(x => $"/images/{x.Photo}"));
         }
     }
 }
