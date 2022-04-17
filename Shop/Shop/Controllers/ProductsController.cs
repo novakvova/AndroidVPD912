@@ -22,6 +22,7 @@ namespace Shop.Controllers
         }
 
         [HttpPost("create")]
+        [RequestSizeLimit(100 * 1024 * 1024)]     // set the maximum file size limit to 100 MB
         public IActionResult Create(CreateProductViewModel model)
         {
             var img = ImageWorker.FromBase64StringToImage(model.Image);
@@ -39,6 +40,7 @@ namespace Shop.Controllers
         [HttpGet("list")]
         public IActionResult Index()
         {
+            Thread.Sleep(2000);
             var list = _context.Products
                     .Select(x=>_mapper.Map<ProductItemViewModel>(x))
                     .ToList();

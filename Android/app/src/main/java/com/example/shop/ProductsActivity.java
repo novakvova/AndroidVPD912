@@ -9,6 +9,7 @@ import android.os.Bundle;
 import com.example.shop.dto.ProductDTO;
 import com.example.shop.network.ProductService;
 import com.example.shop.productcard.ProductsAdapter;
+import com.example.shop.utils.CommonUtils;
 
 import java.util.List;
 
@@ -16,7 +17,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class ProductsActivity extends AppCompatActivity {
+public class ProductsActivity extends BaseActivity {
 
     private RecyclerView rcvProducts;
     private ProductsAdapter adapter;
@@ -29,7 +30,7 @@ public class ProductsActivity extends AppCompatActivity {
         rcvProducts.setHasFixedSize(true);
         rcvProducts.setLayoutManager(new GridLayoutManager(this, 2,
                 RecyclerView.VERTICAL, false));
-
+        CommonUtils.showLoading(this);
         ProductService.getInstance()
                 .jsonApi()
                 .list()
@@ -41,6 +42,7 @@ public class ProductsActivity extends AppCompatActivity {
                             adapter=new ProductsAdapter(response.body());
                             rcvProducts.setAdapter(adapter);
                         }
+                        CommonUtils.hideLoading();
                     }
 
                     @Override

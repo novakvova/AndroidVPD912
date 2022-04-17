@@ -3,7 +3,7 @@ Description=vpd912.novakvova.com
 
 [Service]
 WorkingDirectory=/var/www/android/vpd912.novakvova.com
-ExecStart=/usr/bin/dotnet Shop.dll --urls=http://localhost:5872
+ExecStart=/usr/bin/dotnet Shop.dll --urls=https://localhost:5872
 Restart=always
 # Restart service after 10 seconds if the dotnet service crashes:
 RestartSec=10

@@ -1,4 +1,5 @@
 using FluentValidation.AspNetCore;
+using Microsoft.AspNetCore.Http.Features;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.FileProviders;
 using Newtonsoft.Json;
@@ -27,6 +28,13 @@ builder.Services.AddFluentValidation(x => x.RegisterValidatorsFromAssemblyContai
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddCors();
+builder.Services.Configure<FormOptions>(options =>
+{
+    // Set the limit to 256 MB
+    options.ValueCountLimit = 1024;
+    options.KeyLengthLimit = 1024 * 2;
+    options.ValueLengthLimit = 1024 * 1024 * 100;
+});
 
 var app = builder.Build();
 
