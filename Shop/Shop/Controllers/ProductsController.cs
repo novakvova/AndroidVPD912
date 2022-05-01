@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Shop.Data;
@@ -22,6 +23,7 @@ namespace Shop.Controllers
         }
 
         [HttpPost("create")]
+        [Authorize]
         [RequestSizeLimit(100 * 1024 * 1024)]     // set the maximum file size limit to 100 MB
         public IActionResult Create(CreateProductViewModel model)
         {

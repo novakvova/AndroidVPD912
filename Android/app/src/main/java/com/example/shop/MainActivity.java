@@ -15,6 +15,7 @@ import android.view.View;
 import android.view.Window;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.shop.dto.CreateProductDTO;
 import com.example.shop.dto.CreateProductResultDTO;
@@ -118,6 +119,7 @@ public class MainActivity extends BaseActivity {
                         }
                         else {
                             try {
+                                Toast.makeText(MainActivity.this, "Problem "+response.code(), Toast.LENGTH_SHORT).show();
                                 String json = response.errorBody().string();
                                 Gson gson = new Gson();
                                 ValidationCreateProductDTO serverError = gson.fromJson(json,
