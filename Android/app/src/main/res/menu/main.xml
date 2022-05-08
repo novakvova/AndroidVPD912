@@ -9,6 +9,10 @@
         android:id="@+id/group_anonimus"
         android:visible="true">
         <item
+            android:id="@+id/m_register"
+            android:title="Реєстрація"
+            app:showAsAction="never" />
+        <item
             android:id="@+id/m_login"
             android:title="Вхід"
             app:showAsAction="never" />

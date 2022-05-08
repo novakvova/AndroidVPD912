@@ -33,6 +33,8 @@
         /// </summary>
         /// <example>123456</example>
         public string Password { get; set; }
+
+        public List<UserItemViewModel> Girls { get; set; }
     }
 
     public class TokenResponceViewModel
